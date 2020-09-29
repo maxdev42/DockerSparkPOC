@@ -1,1 +1,1 @@
-# docker-dotnet-spark# DockerSparkPOC
+# DockerSparkPOC
