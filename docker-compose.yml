@@ -1,0 +1,9 @@
+version: '2.0'
+
+services:
+    spark-api:
+        image: sparkapi
+        container_name: sparkcontainer
+        build: .
+        ports:
+            - "5001:80"

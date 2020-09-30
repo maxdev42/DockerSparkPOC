@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as core
-
+FROM eeacms/haproxy:latest
+COPY haproxy.cfg /etc/haproxy/haproxy.cfg
 FROM openjdk:8u212-jre
 
 WORKDIR /src/GettingData
@@ -19,8 +20,8 @@ ENV \
 ENV SPARK_HOME=/usr/local/spark-2.4.4-bin-hadoop2.7
 ENV PATH=:${PATH}:${SPARK_HOME}/bin:/usr/share/dotnet
 
-
-RUN apt-get update
-RUN apt-get install git --assume-yes
-
 RUN dotnet --info
+
+CMD ["haproxy","-f","/etc/haproxy/haproxy.cfg","-p","/run/haproxy.pid"]
+
+EXPOSE 80
